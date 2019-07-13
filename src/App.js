@@ -65,9 +65,10 @@ class App extends Component {
     }
     // self.getCombinations(self.state.bettingGames);
     return (self.state.bettingGamesCombinations = self.getCombinations([
-      "NYY",
-      "LAD",
-      "WAS"
+      "WAS",
+      "OAK",
+      "BOS",
+      "PHI"
     ]));
   }
 
@@ -80,7 +81,7 @@ class App extends Component {
     this.state.isLoading = true;
     axios({
       method: "get",
-      url: `http://localhost:3001/dailygames`
+      url: `http://localhost:3008/dailygames`
     }).then(function(response) {
       console.log("response", response.data);
       self.state.games = response.data;
@@ -196,8 +197,7 @@ class App extends Component {
                                 <p>
                                   {!game.awayTeam.teamStats.standings.wins
                                     ? null
-                                      : game.awayTeam.teamStats.standings.wins
-                                    }
+                                    : game.awayTeam.teamStats.standings.wins}
                                 </p>
                                 <p>
                                   {game.homeTeam.teamStats.standings.wins
@@ -305,7 +305,10 @@ class App extends Component {
                                 <p>{game.awayTeam.totalPoints}</p>
                                 <p>{game.homeTeam.totalPoints}</p>
                               </td>
-                              <td className="align-middle" style={{fontWeight: 'bold'}}>
+                              <td
+                                className="align-middle"
+                                style={{ fontWeight: "bold" }}
+                              >
                                 <p>
                                   {game.awayTeam.pitcherPoints +
                                     game.awayTeam.teamPoints >
@@ -339,7 +342,8 @@ class App extends Component {
                                 <p>
                                   {!game.awayTeam.score[0].score.currentInning
                                     ? "Later"
-                                    : game.awayTeam.score[0].score.currentInning}
+                                    : game.awayTeam.score[0].score
+                                        .currentInning}
                                 </p>
                               </td>
                             </tr>
