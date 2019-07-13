@@ -81,7 +81,7 @@ class App extends Component {
     this.state.isLoading = true;
     axios({
       method: "get",
-      url: `http://34.217.60.211:3008/dailygames`
+      url: `http://18.237.192.82:3008/dailygames`
     }).then(function(response) {
       console.log("response", response.data);
       self.state.games = response.data;
