@@ -65,10 +65,9 @@ class App extends Component {
     }
     // self.getCombinations(self.state.bettingGames);
     return (self.state.bettingGamesCombinations = self.getCombinations([
-      "WAS",
-      "OAK",
-      "BOS",
-      "PHI"
+      "CWS",
+      "LAD",
+      "CLE",
     ]));
   }
 
@@ -81,7 +80,7 @@ class App extends Component {
     this.state.isLoading = true;
     axios({
       method: "get",
-      url: `http://172.31.15.118:3008/dailygames`
+      url: `http://18.237.192.82:3008/dailygames`
     }).then(function(response) {
       console.log("response", response.data);
       self.state.games = response.data;
