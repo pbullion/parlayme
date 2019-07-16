@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Col, Container, Row } from "react-bootstrap";
 import Loader from "react-loader-spinner";
+import "./TodayPage.css";
 
 class TodayPage extends Component {
   constructor(props) {
@@ -369,42 +370,40 @@ class TodayPage extends Component {
       );
     } else {
       return (
-        <div
-          className="App"
+        <Container
           style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            bottom: 0,
-            right: 0,
             display: "flex",
+            flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            overflow: "auto"
+            marginTop: 300,
+            width: "100%"
           }}
         >
-          <Container
-            fluid
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center"
-            }}
-          >
-            <Row>
-              <h1 style={{ marginBottom: 30 }}>Loading, chill tf out.</h1>
-            </Row>
-            <Row>
+          <Row>
+            <Col xs={12}>
+              <h1>Loading, chill tf out.</h1>
+            </Col>
+          </Row>
+          <Row>
+            <Col
+              xs={12}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center"
+              }}
+            >
               <Loader
                 type="CradleLoader"
                 color="#00BFFF"
                 height={600}
                 width={600}
               />
-            </Row>
-          </Container>
-        </div>
+            </Col>
+          </Row>
+        </Container>
       );
     }
   }
