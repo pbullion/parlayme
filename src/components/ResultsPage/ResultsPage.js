@@ -34,7 +34,10 @@ class ResultsPage extends Component {
           paddingTop: 50
         }}
       >
-        <h1 style={{ marginBottom: 20 }}>RESULTS</h1>
+        <Col xs={12} style={{ marginBottom: 20 }}>
+          <h1>RUNNING TOTAL</h1>
+          <h1 style={{ color: "#25d412", fontSize: 50 }}>$489</h1>
+        </Col>
         <Row>
           <Col xs={12} sm={6}>
             <img className="team" src={july15} />
