@@ -37,6 +37,7 @@ class ResultsPage extends Component {
         <Col xs={12} style={{ marginBottom: 20 }}>
           <h1>RUNNING TOTAL</h1>
           <h1 style={{ color: "#25d412", fontSize: 50 }}>$489</h1>
+          <h3>in 11 days</h3>
         </Col>
         <Row>
           <Col xs={12} sm={6}>
