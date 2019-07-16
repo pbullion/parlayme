@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .App-logo {
@@ -19,10 +20,6 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -30,4 +27,19 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.App a:link {
+  text-decoration: none !important;
+  color: white !important;
+}
+
+.App a:hover {
+  text-decoration: none !important;
+  color: white !important;
+}
+
+.App a {
+  text-decoration: none !important;
+  color: white !important;
 }
