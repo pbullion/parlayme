@@ -1,3 +1,9 @@
-a:hover {
-    text-decoration: none;
+img {
+    width: 400px;
+    float: right;
+}
+
+.row {
+    margin-bottom: 50px;
+    width: 100%
 }
