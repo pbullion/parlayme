@@ -65,9 +65,10 @@ class App extends Component {
     }
     // self.getCombinations(self.state.bettingGames);
     return (self.state.bettingGamesCombinations = self.getCombinations([
-      "CWS",
-      "LAD",
+      "OAK",
+      "BOS",
       "CLE",
+      "LAD"
     ]));
   }
 
