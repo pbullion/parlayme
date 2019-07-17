@@ -3,7 +3,7 @@ import axios from "axios";
 import { Col, Container, Row } from "react-bootstrap";
 import Loader from "react-loader-spinner";
 import "./TodayPage.css";
-import * as moment from 'moment';
+import * as moment from "moment";
 
 class TodayPage extends Component {
   constructor(props) {
@@ -13,7 +13,9 @@ class TodayPage extends Component {
       isLoading: false,
       bettingGames: [],
       bettingGamesCombinations: [],
-      today: moment().utcOffset("-05:00").format("dddd, MMMM Do YYYY")
+      today: moment()
+        .utcOffset("-05:00")
+        .format("dddd, MMMM Do YYYY")
     };
   }
 
@@ -92,7 +94,6 @@ class TodayPage extends Component {
       console.log(self.state.bettingGamesCombinations);
       self.forceUpdate();
     });
-
   }
 
   render() {
@@ -104,11 +105,12 @@ class TodayPage extends Component {
             <h1>{this.state.today}</h1>
           </Row>
           <Row>
-            <h1>
+            <h3>
               <a href="http://www.parlaymeplease.com/results">
                 CLICK HERE FOR PAST RESULTS
               </a>
-            </h1>          </Row>
+            </h3>
+          </Row>
           <Row>
             <Col xs={12} sm={8}>
               <table className="table">
