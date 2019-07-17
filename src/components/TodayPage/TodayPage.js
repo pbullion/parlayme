@@ -104,6 +104,12 @@ class TodayPage extends Component {
             <h1>{this.state.today}</h1>
           </Row>
           <Row>
+            <h1>
+              <a href="http://www.parlaymeplease.com/results">
+                CLICK HERE FOR PAST RESULTS
+              </a>
+            </h1>          </Row>
+          <Row>
             <Col xs={12} sm={8}>
               <table className="table">
                 <thead>
