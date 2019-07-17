@@ -72,7 +72,7 @@ class TodayPage extends Component {
       "OAK",
       "BOS",
       "CLE",
-      "LAD"
+      "MIN"
     ]));
   }
 
