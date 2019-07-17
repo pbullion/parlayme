@@ -87,7 +87,6 @@ class TodayPage extends Component {
       method: "get",
       url: `http://18.237.192.82:3008/dailygames`
     }).then(function(response) {
-      console.log("response", response.data);
       self.state.games = response.data;
       self.getBettingGames();
       self.state.isLoading = false;
@@ -350,7 +349,11 @@ class TodayPage extends Component {
                             <td className="align-middle">
                               <p>
                                 {!game.awayTeam.score[0].score.currentInning
-                                  ? "Later"
+                                  ? null : game.awayTeam.score[0].score.currentInningHalf}
+                              </p>
+                              <p>
+                                {!game.awayTeam.score[0].score.currentInning
+                                  ? moment(game.awayTeam.score[0].schedule.startTime).format("h:mm A")
                                   : game.awayTeam.score[0].score.currentInning}
                               </p>
                             </td>
