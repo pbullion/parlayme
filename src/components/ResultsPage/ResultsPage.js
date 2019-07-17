@@ -45,7 +45,7 @@ class ResultsPage extends Component {
           </Col>
           <Col xs={12} sm={6}>
             <h5>Date: 07/15/2019</h5>
-            <h5>Rrecord: 2-3</h5>
+            <h5>Record: 2-3</h5>
             <h5>
               Money: <font color="red"> -35</font>
             </h5>
