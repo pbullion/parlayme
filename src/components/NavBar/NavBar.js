@@ -21,7 +21,7 @@ class NavBar extends Component {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
             <Nav.Link><Link to={'/today'}>Today's Games</Link></Nav.Link>
-            {/*<Nav.Link><Link to={'/today'}>Past Games</Link></Nav.Link>*/}
+            <Nav.Link><Link to={'/combinations'}>Today's Combinations</Link></Nav.Link>
             <Nav.Link><Link to={'/results'}>Betting Results</Link></Nav.Link>
           </Nav>
         </Navbar.Collapse>
