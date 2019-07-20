@@ -1,7 +1,8 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { Container, Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./HomePage.css";
+import NavBar from "../NavBar/NavBar";
 
 const linkStyle = {
   width: 500,
@@ -15,20 +16,21 @@ class HomePage extends Component {
 
   render() {
     return (
-      <Container
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          width: "100vw",
-          height: "100vh",
-          color: "#ffffff"
-        }}
-        fluid
-      >
-
-      </Container>
+      <Fragment>
+        <NavBar />
+        <Container
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "100vw",
+            height: "100vh",
+            color: "#ffffff"
+          }}
+          fluid
+        />
+      </Fragment>
     );
   }
 }

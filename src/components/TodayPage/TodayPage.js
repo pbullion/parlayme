@@ -1,9 +1,10 @@
-import React, { Component } from "react";
+import React, {Component, Fragment} from "react";
 import axios from "axios";
 import { Col, Container, Row } from "react-bootstrap";
 import Loader from "react-loader-spinner";
 import "./TodayPage.css";
 import * as moment from "moment";
+import NavBar from "../NavBar/NavBar";
 
 class TodayPage extends Component {
   constructor(props) {
@@ -97,330 +98,311 @@ class TodayPage extends Component {
 
   render() {
     if (!this.state.isLoading) {
-      console.log("render status", this.state.isLoading);
       return (
-        <Container fluid>
-          <Row>
-            <h1>{this.state.today}</h1>
-          </Row>
-          <Row>
-            <h3>
-              <a href="http://www.parlaymeplease.com/results">
-                CLICK HERE FOR PAST RESULTS
-              </a>
-            </h3>
-          </Row>
-          <Row>
-            <Col xs={12} sm={8}>
-              <table className="table">
-                <thead>
-                  <tr>
-                    <th scope="col">Teams</th>
-                    <th scope="col">Win</th>
-                    <th scope="col">Loss</th>
-                    <th scope="col">%</th>
-                    <th scope="col">Points</th>
-                    <th scope="col">Pitcher</th>
-                    <th scope="col">Pitcher Wins</th>
-                    <th scope="col">Pitcher Losses</th>
-                    <th scope="col">Pitcher %</th>
-                    <th scope="col">Pitcher Points</th>
-                    <th scope="col">TOTALS</th>
-                    <th scope="col">Difference</th>
-                    <th scope="col">Score</th>
-                    <th scope="col">Inning</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {this.state.games
-                    ? this.state.games.map((game, index) => {
-                        let color = "";
-                        if (
-                          game.awayTeam.totalPoints > game.homeTeam.totalPoints
-                        ) {
-                          let difference =
-                            game.awayTeam.totalPoints -
-                            game.homeTeam.totalPoints;
-                          if (difference >= 10) {
-                            color = "#32e50a";
+          <Fragment>
+            <NavBar />
+
+            <Container fluid>
+              <Row>
+                <h1>{this.state.today}</h1>
+              </Row>
+              <Row>
+                <Col xs={12} sm={8}>
+                  <table className="table">
+                    <thead>
+                    <tr>
+                      <th scope="col">Teams</th>
+                      <th scope="col">Win</th>
+                      <th scope="col">Loss</th>
+                      <th scope="col">%</th>
+                      <th scope="col">Points</th>
+                      <th scope="col">Pitcher</th>
+                      <th scope="col">Pitcher Wins</th>
+                      <th scope="col">Pitcher Losses</th>
+                      <th scope="col">Pitcher %</th>
+                      <th scope="col">Pitcher Points</th>
+                      <th scope="col">TOTALS</th>
+                      <th scope="col">Difference</th>
+                      <th scope="col">Score</th>
+                      <th scope="col">Inning</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {this.state.games
+                        ? this.state.games.map((game, index) => {
+                          let color = "";
+                          if (
+                              game.awayTeam.totalPoints > game.homeTeam.totalPoints
+                          ) {
+                            let difference =
+                                game.awayTeam.totalPoints -
+                                game.homeTeam.totalPoints;
+                            if (difference >= 10) {
+                              color = "#32e50a";
+                            }
+                            if (difference < 10 && difference >= 9) {
+                              color = "#dae506";
+                            }
+                            if (difference < 9) {
+                              color = "#e50006";
+                            }
                           }
-                          if (difference < 10 && difference >= 9) {
-                            color = "#dae506";
+                          if (
+                              game.homeTeam.totalPoints > game.awayTeam.totalPoints
+                          ) {
+                            let difference =
+                                game.homeTeam.totalPoints -
+                                game.awayTeam.totalPoints;
+                            if (difference >= 10) {
+                              color = "#32e50a";
+                            }
+                            if (difference < 10 && difference >= 9) {
+                              color = "#dae506";
+                            }
+                            if (difference < 9) {
+                              color = "#e50006";
+                            }
                           }
-                          if (difference < 9) {
+                          if (
+                              game.homeTeam.totalPoints ===
+                              game.awayTeam.totalPoints
+                          ) {
                             color = "#e50006";
                           }
-                        }
-                        if (
-                          game.homeTeam.totalPoints > game.awayTeam.totalPoints
-                        ) {
-                          let difference =
-                            game.homeTeam.totalPoints -
-                            game.awayTeam.totalPoints;
-                          if (difference >= 10) {
-                            color = "#32e50a";
-                          }
-                          if (difference < 10 && difference >= 9) {
-                            color = "#dae506";
-                          }
-                          if (difference < 9) {
-                            color = "#e50006";
-                          }
-                        }
-                        if (
-                          game.homeTeam.totalPoints ===
-                          game.awayTeam.totalPoints
-                        ) {
-                          color = "#e50006";
-                        }
-                        return (
-                          <tr key={index} style={{ backgroundColor: color }}>
-                            <td>
-                              <p
-                                style={{
-                                  fontWeight:
-                                    game.awayTeam.pitcherPoints +
-                                      game.awayTeam.teamPoints >
-                                    game.homeTeam.pitcherPoints +
-                                      game.homeTeam.teamPoints
-                                      ? "bold"
-                                      : null
-                                }}
-                              >
-                                {game.awayTeam.abbreviation}
-                              </p>
-                              <p
-                                style={{
-                                  fontWeight:
-                                    game.homeTeam.pitcherPoints +
-                                      game.homeTeam.teamPoints >
-                                    game.awayTeam.pitcherPoints +
-                                      game.awayTeam.teamPoints
-                                      ? "bold"
-                                      : null
-                                }}
-                              >
-                                {game.homeTeam.abbreviation}
-                              </p>
-                            </td>
-                            <td className="align-middle">
-                              <p>
-                                {!game.awayTeam.teamStats.standings.wins
-                                  ? null
-                                  : game.awayTeam.teamStats.standings.wins}
-                              </p>
-                              <p>
-                                {game.homeTeam.teamStats.standings.wins
-                                  ? game.homeTeam.teamStats.standings.wins
-                                  : null}
-                              </p>
-                            </td>
-                            <td className="align-middle">
-                              <p>
-                                {game.awayTeam.teamStats.standings.losses
-                                  ? game.awayTeam.teamStats.standings.losses
-                                  : null}
-                              </p>
-                              <p>
-                                {game.homeTeam.teamStats.standings.losses
-                                  ? game.homeTeam.teamStats.standings.losses
-                                  : null}
-                              </p>
-                            </td>
-                            <td className="align-middle">
-                              <p>
-                                {game.awayTeam.teamStats.standings.winPct
-                                  ? game.awayTeam.teamStats.standings.winPct
-                                  : null}
-                              </p>
-                              <p>
-                                {game.homeTeam.teamStats.standings.winPct
-                                  ? game.homeTeam.teamStats.standings.winPct
-                                  : null}
-                              </p>
-                            </td>
-                            <td className="align-middle">
-                              <p>
-                                {game.awayTeam.teamPoints
-                                  ? game.awayTeam.teamPoints
-                                  : null}
-                              </p>
-                              <p>
-                                {game.homeTeam.teamPoints
-                                  ? game.homeTeam.teamPoints
-                                  : null}
-                              </p>
-                            </td>
-                            <td className="align-middle">
-                              <p>
-                                {!game.awayTeam.pitcher[0].player
-                                  ? null
-                                  : game.awayTeam.pitcher[0].player.lastName}
-                              </p>
-                              <p>
-                                {!game.homeTeam.pitcher[0].player
-                                  ? null
-                                  : game.homeTeam.pitcher[0].player.lastName}
-                              </p>
-                            </td>
-                            <td className="align-middle">
-                              <p>
-                                {!game.awayTeam.pitcher[0].stats
-                                  ? 0
-                                  : game.awayTeam.pitcher[0].stats.wins}
-                              </p>
-                              <p>
-                                {!game.homeTeam.pitcher[0].stats
-                                  ? 0
-                                  : game.homeTeam.pitcher[0].stats.wins}
-                              </p>
-                            </td>
-                            <td className="align-middle">
-                              <p>
-                                {!game.awayTeam.pitcher[0].stats
-                                  ? 0
-                                  : game.awayTeam.pitcher[0].stats.losses}
-                              </p>
-                              <p>
-                                {!game.homeTeam.pitcher[0].stats
-                                  ? 0
-                                  : game.homeTeam.pitcher[0].stats.losses}
-                              </p>
-                            </td>
-                            <td className="align-middle">
-                              <p>
-                                {!game.awayTeam.pitcher[0].stats
-                                  ? 0
-                                  : game.awayTeam.pitcher[0].stats.winPct}
-                              </p>
-                              <p>
-                                {!game.homeTeam.pitcher[0].stats
-                                  ? 0
-                                  : game.homeTeam.pitcher[0].stats.winPct}
-                              </p>
-                            </td>
-                            <td className="align-middle">
-                              <p>
-                                {game.awayTeam.pitcherPoints
-                                  ? game.awayTeam.pitcherPoints
-                                  : 0}
-                              </p>
-                              <p>
-                                {game.homeTeam.pitcherPoints
-                                  ? game.homeTeam.pitcherPoints
-                                  : 0}
-                              </p>
-                            </td>
-                            <td className="align-middle">
-                              <p>{game.awayTeam.totalPoints}</p>
-                              <p>{game.homeTeam.totalPoints}</p>
-                            </td>
-                            <td
-                              className="align-middle"
-                              style={{ fontWeight: "bold" }}
-                            >
-                              <p>
-                                {game.awayTeam.pitcherPoints +
-                                  game.awayTeam.teamPoints >
-                                game.homeTeam.pitcherPoints +
-                                  game.homeTeam.teamPoints
-                                  ? game.awayTeam.pitcherPoints +
-                                    game.awayTeam.teamPoints -
-                                    (game.homeTeam.pitcherPoints +
-                                      game.homeTeam.teamPoints)
-                                  : game.homeTeam.pitcherPoints +
-                                    game.homeTeam.teamPoints -
-                                    (game.awayTeam.pitcherPoints +
-                                      game.awayTeam.teamPoints)}
-                              </p>
-                            </td>
-                            <td className="align-middle">
-                              <p>
-                                {!game.awayTeam.score[0].score.awayScoreTotal
-                                  ? 0
-                                  : game.awayTeam.score[0].score.awayScoreTotal}
-                              </p>
-                              <p>
-                                {!game.homeTeam.score[0].score.homeScoreTotal
-                                  ? 0
-                                  : game.homeTeam.score[0].score.homeScoreTotal}
-                              </p>
-                            </td>
-                            <td className="align-middle">
-                              <p>
-                                {!game.awayTeam.score[0].score.currentInning
-                                  ? null : game.awayTeam.score[0].score.currentInningHalf}
-                              </p>
-                              <p>
-                                {!game.awayTeam.score[0].score.currentInning
-                                  ? moment(game.awayTeam.score[0].schedule.startTime).format("h:mm A")
-                                  : game.awayTeam.score[0].score.currentInning}
-                              </p>
-                            </td>
-                          </tr>
-                        );
-                      })
-                    : null}
-                </tbody>
-              </table>
-            </Col>
-            <Col xs={12} sm={4}>
-              <h1>Combinations To Bet</h1>
-              {this.state.bettingGamesCombinations
-                ? this.state.bettingGamesCombinations.map((bet, index) => {
-                    return (
-                      <ul key={index}>
-                        {bet.map((item, index) => {
                           return (
-                            <li style={{ listStyle: "none" }} key={index}>
-                              {item}
-                            </li>
+                              <tr key={index} style={{ backgroundColor: color }}>
+                                <td>
+                                  <p
+                                      style={{
+                                        fontWeight:
+                                            game.awayTeam.pitcherPoints +
+                                            game.awayTeam.teamPoints >
+                                            game.homeTeam.pitcherPoints +
+                                            game.homeTeam.teamPoints
+                                                ? "bold"
+                                                : null
+                                      }}
+                                  >
+                                    {game.awayTeam.abbreviation}
+                                  </p>
+                                  <p
+                                      style={{
+                                        fontWeight:
+                                            game.homeTeam.pitcherPoints +
+                                            game.homeTeam.teamPoints >
+                                            game.awayTeam.pitcherPoints +
+                                            game.awayTeam.teamPoints
+                                                ? "bold"
+                                                : null
+                                      }}
+                                  >
+                                    {game.homeTeam.abbreviation}
+                                  </p>
+                                </td>
+                                <td className="align-middle">
+                                  <p>
+                                    {!game.awayTeam.teamStats.standings.wins
+                                        ? null
+                                        : game.awayTeam.teamStats.standings.wins}
+                                  </p>
+                                  <p>
+                                    {game.homeTeam.teamStats.standings.wins
+                                        ? game.homeTeam.teamStats.standings.wins
+                                        : null}
+                                  </p>
+                                </td>
+                                <td className="align-middle">
+                                  <p>
+                                    {game.awayTeam.teamStats.standings.losses
+                                        ? game.awayTeam.teamStats.standings.losses
+                                        : null}
+                                  </p>
+                                  <p>
+                                    {game.homeTeam.teamStats.standings.losses
+                                        ? game.homeTeam.teamStats.standings.losses
+                                        : null}
+                                  </p>
+                                </td>
+                                <td className="align-middle">
+                                  <p>
+                                    {game.awayTeam.teamStats.standings.winPct
+                                        ? game.awayTeam.teamStats.standings.winPct
+                                        : null}
+                                  </p>
+                                  <p>
+                                    {game.homeTeam.teamStats.standings.winPct
+                                        ? game.homeTeam.teamStats.standings.winPct
+                                        : null}
+                                  </p>
+                                </td>
+                                <td className="align-middle">
+                                  <p>
+                                    {game.awayTeam.teamPoints
+                                        ? game.awayTeam.teamPoints
+                                        : null}
+                                  </p>
+                                  <p>
+                                    {game.homeTeam.teamPoints
+                                        ? game.homeTeam.teamPoints
+                                        : null}
+                                  </p>
+                                </td>
+                                <td className="align-middle">
+                                  <p>
+                                    {!game.awayTeam.pitcher[0].player
+                                        ? null
+                                        : game.awayTeam.pitcher[0].player.lastName}
+                                  </p>
+                                  <p>
+                                    {!game.homeTeam.pitcher[0].player
+                                        ? null
+                                        : game.homeTeam.pitcher[0].player.lastName}
+                                  </p>
+                                </td>
+                                <td className="align-middle">
+                                  <p>
+                                    {!game.awayTeam.pitcher[0].stats
+                                        ? 0
+                                        : game.awayTeam.pitcher[0].stats.wins}
+                                  </p>
+                                  <p>
+                                    {!game.homeTeam.pitcher[0].stats
+                                        ? 0
+                                        : game.homeTeam.pitcher[0].stats.wins}
+                                  </p>
+                                </td>
+                                <td className="align-middle">
+                                  <p>
+                                    {!game.awayTeam.pitcher[0].stats
+                                        ? 0
+                                        : game.awayTeam.pitcher[0].stats.losses}
+                                  </p>
+                                  <p>
+                                    {!game.homeTeam.pitcher[0].stats
+                                        ? 0
+                                        : game.homeTeam.pitcher[0].stats.losses}
+                                  </p>
+                                </td>
+                                <td className="align-middle">
+                                  <p>
+                                    {!game.awayTeam.pitcher[0].stats
+                                        ? 0
+                                        : game.awayTeam.pitcher[0].stats.winPct}
+                                  </p>
+                                  <p>
+                                    {!game.homeTeam.pitcher[0].stats
+                                        ? 0
+                                        : game.homeTeam.pitcher[0].stats.winPct}
+                                  </p>
+                                </td>
+                                <td className="align-middle">
+                                  <p>
+                                    {game.awayTeam.pitcherPoints
+                                        ? game.awayTeam.pitcherPoints
+                                        : 0}
+                                  </p>
+                                  <p>
+                                    {game.homeTeam.pitcherPoints
+                                        ? game.homeTeam.pitcherPoints
+                                        : 0}
+                                  </p>
+                                </td>
+                                <td className="align-middle">
+                                  <p>{game.awayTeam.totalPoints}</p>
+                                  <p>{game.homeTeam.totalPoints}</p>
+                                </td>
+                                <td
+                                    className="align-middle"
+                                    style={{ fontWeight: "bold" }}
+                                >
+                                  <p>
+                                    {game.awayTeam.pitcherPoints +
+                                    game.awayTeam.teamPoints >
+                                    game.homeTeam.pitcherPoints +
+                                    game.homeTeam.teamPoints
+                                        ? game.awayTeam.pitcherPoints +
+                                        game.awayTeam.teamPoints -
+                                        (game.homeTeam.pitcherPoints +
+                                            game.homeTeam.teamPoints)
+                                        : game.homeTeam.pitcherPoints +
+                                        game.homeTeam.teamPoints -
+                                        (game.awayTeam.pitcherPoints +
+                                            game.awayTeam.teamPoints)}
+                                  </p>
+                                </td>
+                                <td className="align-middle">
+                                  <p>
+                                    {!game.awayTeam.score[0].score.awayScoreTotal
+                                        ? 0
+                                        : game.awayTeam.score[0].score.awayScoreTotal}
+                                  </p>
+                                  <p>
+                                    {!game.homeTeam.score[0].score.homeScoreTotal
+                                        ? 0
+                                        : game.homeTeam.score[0].score.homeScoreTotal}
+                                  </p>
+                                </td>
+                                <td className="align-middle">
+                                  <p>
+                                    {!game.awayTeam.score[0].score.currentInning
+                                        ? null : game.awayTeam.score[0].score.currentInningHalf}
+                                  </p>
+                                  <p>
+                                    {!game.awayTeam.score[0].score.currentInning
+                                        ? moment(game.awayTeam.score[0].schedule.startTime).format("h:mm A")
+                                        : game.awayTeam.score[0].score.currentInning}
+                                  </p>
+                                </td>
+                              </tr>
                           );
-                        })}
-                      </ul>
-                    );
-                  })
-                : null}
-            </Col>
-          </Row>
-        </Container>
+                        })
+                        : null}
+                    </tbody>
+                  </table>
+                </Col>
+              </Row>
+            </Container>
+          </Fragment>
       );
     } else {
       return (
-        <Container
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            marginTop: 300,
-            width: "100%"
-          }}
-        >
-          <Row>
-            <Col xs={12}>
-              <h1>Loading, chill tf out.</h1>
-            </Col>
-          </Row>
-          <Row>
-            <Col
-              xs={12}
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center"
-              }}
+          <Fragment>
+            <NavBar />
+            <Container
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  marginTop: 300,
+                  width: "100%"
+                }}
             >
-              <Loader
-                type="CradleLoader"
-                color="#00BFFF"
-                height={600}
-                width={600}
-              />
-            </Col>
-          </Row>
-        </Container>
+              <Row>
+                <Col xs={12}>
+                  <h1>Loading, chill tf out.</h1>
+                </Col>
+              </Row>
+              <Row>
+                <Col
+                    xs={12}
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      justifyContent: "center"
+                    }}
+                >
+                  <Loader
+                      type="CradleLoader"
+                      color="#00BFFF"
+                      height={600}
+                      width={600}
+                  />
+                </Col>
+              </Row>
+            </Container>
+          </Fragment>
       );
     }
   }
