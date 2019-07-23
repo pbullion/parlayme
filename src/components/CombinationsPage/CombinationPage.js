@@ -83,17 +83,17 @@ class CombinationPage extends Component {
 
   componentWillMount() {
     let self = this;
-    this.state.isLoading = true;
-    axios({
-      method: "get",
-      url: `http://18.237.192.82:3008/dailygames`
-    }).then(function(response) {
-      self.state.games = response.data;
-      self.getBettingGames();
-      self.state.isLoading = false;
-      console.log(self.state.bettingGamesCombinations);
-      self.forceUpdate();
-    });
+    // this.state.isLoading = true;
+    // axios({
+    //   method: "get",
+    //   url: `http://18.237.192.82:3008/dailygames`
+    // }).then(function(response) {
+    //   self.state.games = response.data;
+    //   self.getBettingGames();
+    //   self.state.isLoading = false;
+    //   console.log(self.state.bettingGamesCombinations);
+    //   self.forceUpdate();
+    // });
   }
 
   render() {
