@@ -113,7 +113,13 @@ class CombinationPage extends Component {
                 {this.state.bettingGamesCombinations
                   ? this.state.bettingGamesCombinations.map((bet, index) => {
                       return (
-                        <div>
+                        <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "row",
+                              alignItems: "center",
+                              justifyContent: "center"
+                            }}>
                           <FormCheck />
                           <ul key={index}>
                             {bet.map((item, index) => {
