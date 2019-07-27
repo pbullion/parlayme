@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import axios from "axios";
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Container, FormCheck, Row } from "react-bootstrap";
 import Loader from "react-loader-spinner";
 import "./CombinationsPage.css";
 import * as moment from "moment";
@@ -113,15 +113,18 @@ class CombinationPage extends Component {
                 {this.state.bettingGamesCombinations
                   ? this.state.bettingGamesCombinations.map((bet, index) => {
                       return (
-                        <ul key={index}>
-                          {bet.map((item, index) => {
-                            return (
-                              <li style={{ listStyle: "none" }} key={index}>
-                                {item}
-                              </li>
-                            );
-                          })}
-                        </ul>
+                        <div>
+                          <FormCheck />
+                          <ul key={index}>
+                            {bet.map((item, index) => {
+                              return (
+                                <li style={{ listStyle: "none" }} key={index}>
+                                  {item}
+                                </li>
+                              );
+                            })}
+                          </ul>
+                        </div>
                       );
                     })
                   : null}
