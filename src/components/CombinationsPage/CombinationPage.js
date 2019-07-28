@@ -71,7 +71,7 @@ class CombinationPage extends Component {
     // self.getCombinations(self.state.bettingGames);
     return (self.state.bettingGamesCombinations = self.getCombinations([
       "NYY",
-      "HOU",
+      "OAK",
       "LAA",
       "MIN"
     ]));
