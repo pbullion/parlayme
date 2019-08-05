@@ -70,7 +70,7 @@ class CombinationPage extends Component {
     }
     // self.getCombinations(self.state.bettingGames);
     return (self.state.bettingGamesCombinations = self.getCombinations([
-      "LAD",
+      "NYY",
       "PHI",
       "MIN"
     ]));
@@ -82,17 +82,22 @@ class CombinationPage extends Component {
 
   componentWillMount() {
     let self = this;
-    this.state.isLoading = true;
-    axios({
-      method: "get",
-      url: `http://18.237.192.82:3008/dailygames`
-    }).then(function(response) {
-      self.state.games = response.data;
-      self.getBettingGames();
-      self.state.isLoading = false;
-      console.log(self.state.bettingGamesCombinations);
-      self.forceUpdate();
-    });
+    // this.state.isLoading = true;
+    // axios({
+    //   method: "get",
+    //   url: `http://18.237.192.82:3008/dailygames`
+    // }).then(function(response) {
+    //   self.state.games = response.data;
+    //   self.getBettingGames();
+    //   self.state.isLoading = false;
+    //   console.log(self.state.bettingGamesCombinations);
+    //   self.forceUpdate();
+    // });
+    self.state.bettingGamesCombinations = self.getCombinations([
+      "NYY",
+      "PHI",
+      "MIN"
+    ]);
   }
 
   render() {
@@ -108,17 +113,18 @@ class CombinationPage extends Component {
               {" "}
               <Col xs={12}>
                 <h1>Combinations To Bet</h1>
-                <h2>Updated August 3, 2019</h2>
+                <h2>Updated August 5, 2019</h2>
                 {this.state.bettingGamesCombinations
                   ? this.state.bettingGamesCombinations.map((bet, index) => {
                       return (
                         <div
-                            style={{
-                              display: "flex",
-                              flexDirection: "row",
-                              alignItems: "center",
-                              justifyContent: "center"
-                            }}>
+                          style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            alignItems: "center",
+                            justifyContent: "center"
+                          }}
+                        >
                           <FormCheck />
                           <ul key={index}>
                             {bet.map((item, index) => {
