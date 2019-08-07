@@ -71,8 +71,8 @@ class CombinationPage extends Component {
     // self.getCombinations(self.state.bettingGames);
     return (self.state.bettingGamesCombinations = self.getCombinations([
       "NYY",
-      "PHI",
-      "MIN"
+      "BOS",
+      "HOU"
     ]));
   }
 
@@ -95,7 +95,7 @@ class CombinationPage extends Component {
     // });
     self.state.bettingGamesCombinations = self.getCombinations([
       "NYY",
-      "LAD",
+      "HOU",
       "BOS"
     ]);
   }
@@ -113,7 +113,7 @@ class CombinationPage extends Component {
               {" "}
               <Col xs={12}>
                 <h1>Combinations To Bet</h1>
-                <h2>Updated August 6, 2019</h2>
+                <h2>Updated August 8, 2019</h2>
                 {this.state.bettingGamesCombinations
                   ? this.state.bettingGamesCombinations.map((bet, index) => {
                       return (
