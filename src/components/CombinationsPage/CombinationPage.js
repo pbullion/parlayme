@@ -94,10 +94,9 @@ class CombinationPage extends Component {
     //   self.forceUpdate();
     // });
     self.state.bettingGamesCombinations = self.getCombinations([
-      "ATL",
-      "OAK",
-      "CLE",
-      "LAD"
+      "LAD",
+      "HOU",
+      "CLE"
     ]);
   }
 
