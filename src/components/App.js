@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from "react";
-import "./App.css";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import HomePage from "./HomePage";
 import TodayPage from "./TodayPage/TodayPage";
@@ -11,9 +10,9 @@ class App extends Component {
     return (
       <Fragment>
         <Router>
-            <Route path="/" exact component={HomePage} />
-            <Route path="/today" exact component={TodayPage} />
-            <Route path="/combinations" exact component={CombinationPage} />
+          <Route path="/" exact component={HomePage} />
+          <Route path="/today" exact component={TodayPage} />
+          <Route path="/combinations" exact component={CombinationPage} />
           <Route path="/results" exact component={ResultsPage} />
         </Router>
       </Fragment>
