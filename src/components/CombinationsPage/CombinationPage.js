@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import axios from "axios";
-import { Col, Container, FormCheck, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import Loader from "react-loader-spinner";
 import "./CombinationsPage.css";
 import * as moment from "moment";
@@ -70,9 +70,10 @@ class CombinationPage extends Component {
     }
     // self.getCombinations(self.state.bettingGames);
     return (self.state.bettingGamesCombinations = self.getCombinations([
-      "NYY",
-      "CLE",
-      "LAD"
+      "ATL",
+      "BOS",
+      "LAD",
+      "CLE"
     ]));
   }
 
@@ -94,10 +95,11 @@ class CombinationPage extends Component {
     //   self.forceUpdate();
     // });
     self.state.bettingGamesCombinations = self.getCombinations([
-      "LAD",
-      "HOU",
-      "ATL",
-      "NYY"
+      "Rutgers",
+      "Marquette",
+      "Ball State",
+      "Cavs",
+      "Kansas State"
     ]);
   }
 
@@ -111,7 +113,6 @@ class CombinationPage extends Component {
               <h1>{this.state.today}</h1>
             </Row>
             <Row>
-              {" "}
               <Col xs={12}>
                 <h1>Combinations To Bet</h1>
                 <h2>Updated September 10, 2019</h2>

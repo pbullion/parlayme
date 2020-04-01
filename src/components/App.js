@@ -11,7 +11,7 @@ class App extends Component {
     return (
       <Fragment>
         <Router>
-            <Route path="/" exact component={TodayPage} />
+            <Route path="/" exact component={HomePage} />
             <Route path="/today" exact component={TodayPage} />
             <Route path="/combinations" exact component={CombinationPage} />
           <Route path="/results" exact component={ResultsPage} />
